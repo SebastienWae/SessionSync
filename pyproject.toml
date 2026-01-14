@@ -6,7 +6,7 @@ description = "CLI to export and archive coding agent sessions to multiple forma
 readme = "README.md"
 requires-python = ">=3.14"
 authors = [
-  { name = "Sebastien Waegeneire", email = "sebastien@Waegeneire.com" },
+  { name = "Sebastien Waegeneire", email = "sebastien@waegeneire.com" },
 ]
 keywords = [
   "cli",
