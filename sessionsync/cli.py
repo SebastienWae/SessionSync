@@ -153,6 +153,10 @@ def _sync_session(
         )
     )
 
+    if not messages:
+        logger.debug("[%s] Skipping empty session %s", session.agent.value, session.id)
+        return
+
     filepath = exporter.export(session, messages, output)
     logger.info("[%s] Exported %s (%d messages) to %s", session.agent.value, session.id, len(messages), filepath.name)
 
