@@ -22,6 +22,8 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+AGENT_TYPE = AgentType.PI
+
 
 def _parse_unix_ms(value: int | datetime) -> datetime:
     """Parse a Unix millisecond timestamp to a UTC datetime.
@@ -282,7 +284,7 @@ def _parse_session_metadata(jsonl_path: Path) -> Session | None:
     if header := _read_session_header(jsonl_path):
         return Session(
             id=header.id,
-            agent=AgentType.PI,
+            agent=AGENT_TYPE,
             workspace=Path(header.cwd),
             git_branch=None,
             parent_session_id=header.parent_session,
