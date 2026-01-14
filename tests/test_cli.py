@@ -93,8 +93,8 @@ class TestFilterSessions:
         assert len(result) == 2
         assert all(s.git_branch == "main" for s in result)
 
-    def test_none_branch_excluded_when_filtering(self, make_session: Callable[..., Session]) -> None:
-        """Test that sessions with None branch are excluded when branch filter is set."""
+    def test_none_branch_included_when_filtering(self, make_session: Callable[..., Session]) -> None:
+        """Test that sessions with None branch are included when branch filter is set."""
         sessions = iter([
             make_session(session_id="1", git_branch="main"),
             make_session(session_id="2", git_branch=None),
@@ -109,8 +109,7 @@ class TestFilterSessions:
             )
         )
 
-        assert len(result) == 1
-        assert result[0].git_branch == "main"
+        assert len(result) == 2
 
     def test_none_branch_included_when_no_filter(self, make_session: Callable[..., Session]) -> None:
         """Test that sessions with None branch are included when branch filter is None."""

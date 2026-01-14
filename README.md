@@ -68,7 +68,6 @@ Filter by git branch:
 
 ```sh
 sessionsync --branch main
-sessionsync --branch all
 ```
 
 Watch mode for continuous export:
@@ -85,7 +84,7 @@ sessionsync --watch
 | `--output` | `-o` | Output directory (default: `.sessions`) |
 | `--format` | `-f` | Export format: `markdown`, `json`, or `toon` (default: `markdown`) |
 | `--workspace` | `-w` | Filter by workspace path (default: current directory) |
-| `--branch` | `-b` | Filter by git branch (default: current branch, use `all` for all) |
+| `--branch` | `-b` | Filter by git branch |
 | `--no-subagents` | | Exclude subagent sessions |
 | `--no-tools` | | Exclude tool use and result messages |
 | `--no-thinking` | | Exclude assistant thinking messages |
@@ -110,7 +109,7 @@ sessionsync --no-tools --no-thinking
 Export all Claude Code sessions to JSON:
 
 ```sh
-sessionsync --agent claude --format json --branch all
+sessionsync --agent claude --format json
 ```
 
 ## License
