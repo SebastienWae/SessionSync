@@ -4,11 +4,13 @@ if TYPE_CHECKING:
     from collections.abc import Iterator
     from pathlib import Path
 
-    from sessionsync.schema import Message, Session
+    from sessionsync.schema import AgentType, Message, Session
 
 
 class Parser(Protocol):
     """Protocol for agent trace parsers."""
+
+    AGENT_TYPE: AgentType
 
     @staticmethod
     def get_root() -> Path | None:

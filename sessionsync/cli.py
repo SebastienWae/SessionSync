@@ -154,7 +154,7 @@ def _sync_session(
     )
 
     filepath = exporter.export(session, messages, output)
-    logger.info("Exported %s (%d messages) to %s", session.id, len(messages), filepath.name)
+    logger.info("[%s] Exported %s (%d messages) to %s", session.agent.value, session.id, len(messages), filepath.name)
 
 
 def _sync_sessions(
@@ -199,7 +199,7 @@ def _sync_sessions(
                 include_subagents=include_subagents,
             )
         )
-        logger.info("Found %d sessions after filtering", len(sessions))
+        logger.info("[%s] Found %d sessions after filtering", parser.AGENT_TYPE.value, len(sessions))
 
         for session in sessions:
             _sync_session(

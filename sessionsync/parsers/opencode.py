@@ -24,6 +24,8 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+AGENT_TYPE: AgentType = AgentType.OPENCODE
+
 _MS_THRESHOLD = 1e12
 
 
@@ -308,7 +310,7 @@ def _parse_session_file(session_file: Path) -> Session | None:
 
     return Session(
         id=raw.id,
-        agent=AgentType.OPENCODE,
+        agent=AGENT_TYPE,
         workspace=Path(raw.directory),
         git_branch=None,
         parent_session_id=raw.parent_id,

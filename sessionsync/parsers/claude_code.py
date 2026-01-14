@@ -21,6 +21,9 @@ if TYPE_CHECKING:
     from collections.abc import Iterator
 
 logger = logging.getLogger(__name__)
+
+AGENT_TYPE = AgentType.CLAUDE_CODE
+
 _UUID_PATTERN = re.compile(
     r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
     re.IGNORECASE,
@@ -317,7 +320,7 @@ def _parse_session_metadata(
 
     return Session(
         id=session_id,
-        agent=AgentType.CLAUDE_CODE,
+        agent=AGENT_TYPE,
         workspace=workspace,
         git_branch=git_branch,
         parent_session_id=parent_session_id,
