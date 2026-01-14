@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING, Final, Protocol
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class Parser(Protocol):
     """Protocol for agent trace parsers."""
 
-    AGENT_TYPE: AgentType
+    AGENT_TYPE: Final[AgentType]
 
     @staticmethod
     def get_root() -> Path | None:
