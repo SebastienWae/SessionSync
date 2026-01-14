@@ -79,7 +79,7 @@ def _filter_sessions(
     Args:
         sessions: Iterator of sessions to filter.
         workspace: Filter sessions by exact workspace path match.
-        branch: Filter by git branch. Sessions with None branch are excluded.
+        branch: Filter by git branch. Sessions with None branch are always included.
         include_subagents: Whether to include subagent sessions.
 
     Yields:
@@ -88,7 +88,7 @@ def _filter_sessions(
     for session in sessions:
         if workspace is not None and session.workspace != workspace:
             continue
-        if branch is not None and session.git_branch != branch:
+        if branch is not None and session.git_branch is not None and session.git_branch != branch:
             continue
         if not include_subagents and session.parent_session_id is not None:
             continue
@@ -461,13 +461,13 @@ def main(
         ),
     ] = CWD,
     branch: Annotated[
-        str,
+        str | None,
         cyclopts.Parameter(
             name="--branch",
             alias="-b",
-            help="Filter by git branch. Use 'all' for all branches",
+            help="Filter by git branch.",
         ),
-    ] = CURRENT_BRANCH or "all",
+    ] = None,
     no_subagents: Annotated[
         bool,
         cyclopts.Parameter(
@@ -541,7 +541,6 @@ def main(
         handlers=[RichHandler(rich_tracebacks=True, show_path=False, show_time=watch)],
     )
 
-    target_branch = None if branch == "all" else branch
     parsers = _get_parsers(agent)
     exporter = ENABLED_EXPORTERS[output_format]
 
@@ -550,7 +549,7 @@ def main(
         output=output,
         exporter=exporter,
         workspace=workspace,
-        branch=target_branch,
+        branch=branch,
         include_subagents=not no_subagents,
         include_tools=not no_tools,
         include_thinking=not no_thinking,
@@ -563,7 +562,7 @@ def main(
             output=output,
             exporter=exporter,
             workspace=workspace,
-            branch=target_branch,
+            branch=branch,
             include_subagents=not no_subagents,
             include_tools=not no_tools,
             include_thinking=not no_thinking,
