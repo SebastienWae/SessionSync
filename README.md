@@ -29,12 +29,6 @@ Long sessions also cause agents to enter the "[DUMB ZONE](https://www.youtube.co
 
 ## Installation
 
-### Homebrew
-
-```sh
-brew install sessionsync
-```
-
 ### PyPI
 
 ```sh
@@ -44,13 +38,7 @@ pip install sessionsync
 Or with uv:
 
 ```sh
-uv tool install sessionsync
-```
-
-### Arch Linux
-
-```sh
-yay -S sessionsync
+uv tool install sessionsync --prerelease=allow
 ```
 
 ## Usage
