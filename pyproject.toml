@@ -1,6 +1,6 @@
 [project]
 name = "sessionsync"
-version = "0.1.1"
+version = "0.1.2"
 license = "MIT"
 description = "CLI to export and archive coding agent sessions to multiple formats."
 readme = "README.md"
