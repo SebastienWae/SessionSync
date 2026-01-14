@@ -127,4 +127,4 @@ sessionsync --agent claude --format json --branch all
 
 ## License
 
-[MIT](https://opensource.org/licenses/MIT)
+[MIT](LICENSE)
