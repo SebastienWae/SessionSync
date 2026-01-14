@@ -25,7 +25,7 @@ Long sessions also cause agents to enter the "[DUMB ZONE](https://www.youtube.co
 |--------|-------------|
 | Markdown | Human-readable with YAML frontmatter containing session metadata |
 | JSON | Structured data for programmatic access and analysis |
-| TOON | Binary format for compact storage |
+| TOON | Compact, human-readable format designed for LLM |
 
 ## Installation
 
