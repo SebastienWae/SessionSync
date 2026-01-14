@@ -19,7 +19,7 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
-          python-version: "3.14"
+          python-version: "3.12"
       - name: Validate version matches tag
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
