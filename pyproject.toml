@@ -1,32 +1,54 @@
 [project]
 name = "sessionsync"
 version = "0.1.0"
-description = "Add your description here"
+license = "MIT"
+description = "CLI to export and archive coding agent sessions to multiple formats."
 readme = "README.md"
 requires-python = ">=3.14"
+authors = [
+  { name = "Sebastien Waegeneire", email = "sebastien@waegeneire.com" },
+]
+keywords = [
+  "cli",
+  "coding-agent",
+  "claude-code",
+  "opencode",
+  "session",
+  "export",
+  "markdown",
+  "json",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Documentation",
+  "Topic :: Text Processing :: Markup :: Markdown",
+  "Typing :: Typed",
+]
 dependencies = [
   "cyclopts>=4.4.5",
   "pydantic>=2.12.5",
   "rich>=13.9",
-  "toon-format",
+  "toon-format==0.9.0b1",
   "watchdog>=6.0.0",
 ]
 
 [project.scripts]
 sessionsync = "sessionsync.cli:app"
 
+
+[project.urls]
+repository = "https://github.com/SebastienWae/SessionSync"
+issues = "https://github.com/SebastienWae/SessionSync/issues"
+
 [dependency-groups]
 dev = ["basedpyright>=1.37.1", "pytest>=9.0.2", "ruff>=0.14.11"]
-
-[tool.uv.sources]
-toon-format = { git = "https://github.com/toon-format/toon-python.git" }
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[tool.hatch.build.targets.wheel]
-artifacts = ["migrations/*.sql"]
 
 [tool.ruff]
 preview = true
