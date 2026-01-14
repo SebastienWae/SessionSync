@@ -9,6 +9,7 @@ from sessionsync.cli import (
     _filter_messages,
     _filter_sessions,
     _get_parsers,
+    _sync_session,
 )
 from sessionsync.schema import (
     AssistantMessage,
@@ -389,3 +390,39 @@ class TestFilterMessages:
         assert isinstance(result[0], UserMessage)
         assert isinstance(result[1], AssistantMessage)
         assert result[1].is_thinking is False
+
+
+class TestSyncSession:
+    """Tests for _sync_session function."""
+
+    def test_skips_empty_session(
+        self,
+        tmp_path: Path,
+        make_session: Callable[..., Session],
+    ) -> None:
+        """Test that sessions with no messages are skipped."""
+        from unittest.mock import MagicMock
+
+        from sessionsync.exporters.base import Exporter
+        from sessionsync.parsers.base import Parser
+
+        session = make_session()
+        output = tmp_path / "output"
+        output.mkdir()
+
+        mock_parser = MagicMock(spec=Parser)
+        mock_parser.get_messages.return_value = iter([])  # pyright: ignore[reportAny]
+
+        mock_exporter: Exporter = MagicMock(spec=Exporter)
+
+        _sync_session(
+            mock_parser,
+            session,
+            output,
+            mock_exporter,
+            include_tools=True,
+            include_thinking=True,
+            include_attachments=True,
+        )
+
+        mock_exporter.export.assert_not_called()  # pyright: ignore[reportAny]
