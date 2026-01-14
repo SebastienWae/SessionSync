@@ -228,16 +228,7 @@ def _parts_to_messages(
                                 filename=raw.filename,
                             )
                         )
-            case (
-                "step-start"
-                | "step-finish"
-                | "snapshot"
-                | "patch"
-                | "agent"
-                | "retry"
-                | "compaction"
-                | "subtask"
-            ):
+            case "step-start" | "step-finish" | "snapshot" | "patch" | "agent" | "retry" | "compaction" | "subtask":
                 pass
 
     if text_parts:

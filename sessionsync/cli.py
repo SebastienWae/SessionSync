@@ -1,5 +1,6 @@
 import logging
 import time
+from importlib.metadata import version
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Literal, override
 
@@ -34,6 +35,8 @@ console = Console()
 app = cyclopts.App(
     name="sessionsync",
     help="Sync coding agent sessions to markdown files.",
+    version_flags=["--version", "-V"],
+    version=version("sessionsync"),
 )
 
 
