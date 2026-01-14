@@ -1,0 +1,6 @@
+{"type":"user","timestamp":"2024-01-15T10:30:00Z","cwd":"/test/workspace","gitBranch":"main","message":{"content":"Hello, can you help me?"}}
+{"type":"assistant","timestamp":"2024-01-15T10:30:05Z","cwd":"/test/workspace","message":{"content":[{"type":"text","text":"Of course! I'd be happy to help you."}],"model":"claude-3-opus"}}
+{"type":"user","timestamp":"2024-01-15T10:30:10Z","cwd":"/test/workspace","message":{"content":"Read file.txt for me"}}
+{"type":"assistant","timestamp":"2024-01-15T10:30:15Z","cwd":"/test/workspace","message":{"content":[{"type":"tool_use","id":"tool_1","name":"Read","input":{"file_path":"/test/file.txt"}}],"model":"claude-3-opus"}}
+{"type":"assistant","timestamp":"2024-01-15T10:30:16Z","cwd":"/test/workspace","message":{"content":[{"type":"tool_result","tool_use_id":"tool_1","content":"File contents here"}],"model":"claude-3-opus"}}
+{"type":"assistant","timestamp":"2024-01-15T10:30:20Z","cwd":"/test/workspace","message":{"content":[{"type":"text","text":"Here's what I found in the file."}],"model":"claude-3-opus"}}
