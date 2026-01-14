@@ -22,7 +22,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-AGENT_TYPE: AgentType = AgentType.PI
+AGENT_TYPE = AgentType.PI
 
 
 def _parse_unix_ms(value: int | datetime) -> datetime:

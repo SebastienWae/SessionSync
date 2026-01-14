@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-AGENT_TYPE: AgentType = AgentType.OPENCODE
+AGENT_TYPE = AgentType.OPENCODE
 
 _MS_THRESHOLD = 1e12
 
