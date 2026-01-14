@@ -1,0 +1,65 @@
+name: "Publish"
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+      - name: Validate version matches tag
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          if [ -z "$TAG_VERSION" ]; then
+            echo "Could not determine tag version from GITHUB_REF_NAME=${GITHUB_REF_NAME}"
+            exit 1
+          fi
+          FILE_VERSION=$(sed -n 's/^version = "\(.*\)"/\1/p' pyproject.toml | head -n 1)
+          if [ -z "$FILE_VERSION" ]; then
+            echo "Could not find version in pyproject.toml"
+            exit 1
+          fi
+          if [ "$TAG_VERSION" != "$FILE_VERSION" ]; then
+            echo "Git tag version (${TAG_VERSION}) does not match pyproject.toml version (${FILE_VERSION})"
+            exit 1
+          fi
+      - name: Clean dist directory
+        run: rm -rf dist
+      - name: Build
+        run: uv build
+      - name: Locate build artifacts
+        id: dist_files
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          wheels=(dist/*.whl)
+          sdists=(dist/*.tar.gz)
+          if [ "${#wheels[@]}" -ne 1 ]; then
+            echo "Expected exactly one wheel, found ${#wheels[@]}" >&2
+            exit 1
+          fi
+          if [ "${#sdists[@]}" -ne 1 ]; then
+            echo "Expected exactly one source distribution, found ${#sdists[@]}" >&2
+            exit 1
+          fi
+          echo "wheel=${wheels[0]}" >> "$GITHUB_OUTPUT"
+          echo "sdist=${sdists[0]}" >> "$GITHUB_OUTPUT"
+      - name: Smoke test (wheel)
+        run: uv run --isolated --no-project --with "${{ steps.dist_files.outputs.wheel }}" sessionsync --version
+      - name: Smoke test (source distribution)
+        run: uv run --isolated --no-project --with "${{ steps.dist_files.outputs.sdist }}" sessionsync --version
+      - name: Publish
+        run: uv publish
