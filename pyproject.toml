@@ -4,7 +4,7 @@ version = "0.1.1"
 license = "MIT"
 description = "CLI to export and archive coding agent sessions to multiple formats."
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 authors = [
   { name = "Sebastien Waegeneire", email = "sebastien@waegeneire.com" },
 ]
@@ -22,7 +22,7 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",
   "Intended Audience :: Developers",
-  "Programming Language :: Python :: 3.14",
+  "Programming Language :: Python :: 3.12",
   "Topic :: Software Development :: Documentation",
   "Topic :: Text Processing :: Markup :: Markdown",
   "Typing :: Typed",
